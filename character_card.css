@@ -1,0 +1,213 @@
+/* 1. CSS variables (palette customization) */
+:root {
+/* backgrounds and space elements*/
+  --void-deep: #050a14;
+  --void-card: rgba(10, 20, 38, 0.85);
+  --void-inset: rgba(4, 8, 18, 0.5);
+  
+ /*cosmic accents*/
+ --celestial-gold: #e2c061;
+ --celestial-gold-glow: rgba(226, 192, 97, 0.35);
+ --celestial-glow_highlight: rgba(226, 192, 97, 0.15);
+ 
+ /*typography palette*/
+ --starlight-bright: #f0f4f8;
+ --starlight-dim: #94a3b8;
+ --magic-glow-color: #e6f2ff;
+ 
+ /*typography families*/
+ --font-heading: 'Avernis', serif;
+ --font-body: 'Avernis', serif;
+}
+
+/* 2. Base reset and page layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--void-deep);
+  /* radial glow */
+  background-image: radial-gradient(circle at 50% 50%, #0f1b33 0%, var(--void-deep) 100%);
+  color: var(--starlight-bright);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+/* 3. character card (outer framing border)*/
+.character-card {
+  background: var(--void-card);
+  border: 2px solid var(--celestial-gold);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 460px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6),
+              0 0 15px var(--celestial-gold-glow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+              box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* hover */
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8),
+              0 0 25px rgba(226, 192, 97, 0.5);
+}
+
+/* 4. top row split*/
+.card-top-row {
+  display: flex;
+  gap: 18px;
+}
+
+/*portrait img frame (left column) */
+.character-portrait-frame {
+  width: 160px;
+  height: 240px;
+  border: 1px solid var(--celestial-gold-glow);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--void-inset);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+
+.character-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+/*identity and traits (right column) */
+.identity-traits {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.character-name {
+    font-family: var(--font-heading);
+    color: var(--celestial-gold);
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid var(--celestial-gold-glow);
+    padding-bottom: 6px;
+    text-shadow: 0 0 8px rgba(226, 192, 97, 0.2);
+}
+
+/* Traits Summary Container */
+.traits-summary {
+    background: var(--void-inset);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+
+.block-label {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--celestial-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.traits-list {
+    list-style-type: '✧ ';
+    list-style-position: inside;
+    font-size: 0.85rem;
+    color: var(--starlight-bright);
+    line-height: 1.6;
+}
+
+.traits-list li strong {
+    color: var(--celestial-gold);
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+/* 5. MID SECTION: Magic Profile Banner (Full Width) */
+.magic-profile-banner {
+    background: linear-gradient(90deg, var(--celestial-gold-muted) 0%, rgba(0, 0, 0, 0) 100%);
+    border-left: 3px solid var(--celestial-gold);
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.magic-label {
+    font-family: var(--font-heading);
+    color: var(--celestial-gold);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.magic-value {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--magic-glow-color);
+    letter-spacing: 0.3px;
+}
+
+/* 6. BOTTOM ROW SPLIT: Bio & creature Companion */
+.card-bottom-row {
+    display: flex;
+    gap: 14px; /* Space between the bio and guide */
+}
+
+/* Bio and creature Guide Shared Properties */
+.biography-box, 
+.creature-guide-box {
+    flex: 1; /* Splits the space exactly 50/50 */
+    background: var(--void-inset);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sub-headings for the bottom compartments */
+.card-bottom-row h3 {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--celestial-gold);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 4px;
+}
+
+/* Bio paragraphs & companion description text */
+.biography-box p, 
+.creature-bio {
+    font-size: 0.8rem;
+    color: var(--starlight-dimmed);
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.creature-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--starlight-bright);
+    margin-bottom: 4px;
+}
